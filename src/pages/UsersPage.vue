@@ -13,7 +13,7 @@
         <q-item-section avatar>
           <q-avatar color="primary" text-color="white">
 <!--            charAt(0) -grabs the first character/letter from the name -->
-            {{ user.name.charAt(0) }}
+            {{ user.name | firstChar }}
           </q-avatar>
         </q-item-section>
 
@@ -39,6 +39,11 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters('chatstore', ['users'])
+  },
+  filters: {
+    firstChar (val) {
+      return val.charAt(0)
+    }
   }
 }
 </script>

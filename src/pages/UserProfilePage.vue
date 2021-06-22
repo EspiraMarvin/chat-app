@@ -20,10 +20,10 @@
       <q-card-section class="q-pt-none">
         <div class="text-subtitle2">User Name: {{ otherUserDetails.name }}</div>
         <div class="text-caption">Email: {{ otherUserDetails.email }}</div>
-        <div class="text-caption">Joined: {{ otherUserDetails.joined | relativeDate }}</div>
+        <div class="text-caption">Joined: {{ otherUserDetails.joined }}</div>
         <q-card flat>
           <q-input v-model="otherUserDetails.status" class="q-mt-sm" label="Status">
-              <template v-slot:append>
+              <template v-slot:append v-if="userDetails.userId === this.$route.params.otherUserId">
                 <q-icon name="edit" @click="openDialog" class="cursor-pointer" />
               </template>
             </q-input>
@@ -48,14 +48,18 @@
 <script>
 import commonMixins from 'src/mixins/commonMixins'
 import { formatDistance } from 'date-fns'
+import { mapState } from 'vuex'
 export default {
   name: 'UserProfilePage',
   mixins: [commonMixins],
   mounted () {
-    const getPath = this.$route.fullPath
-    const params = this.$route.params.otherUserId
-    console.log('getPath', getPath)
+    console.log('getUserId', this.userDetails.id)
+    const params = this.$route.params.userId
+    // console.log('getPath', getPath)
     console.log('params', params)
+  },
+  computed: {
+    ...mapState('chatstore', ['users', 'userDetails'])
   },
   filters: {
     relativeDate (value) {

@@ -42,8 +42,7 @@ const actions = {
           name: payload.name,
           email: payload.email,
           online: true,
-          status: 'Hey there you are using quasar chat app!',
-          location: 'Kenya',
+          status: 'Hey there...!',
           joined: Date.now()
         })
       })
