@@ -7,5 +7,10 @@ export default {
       }
       return {}
     }
+  },
+  methods: {
+    hasWhiteSpacesOnly (val) {
+      return val.replace(/\s/g, '').length || 'field is empty'
+    }
   }
 }
