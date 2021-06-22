@@ -13,7 +13,7 @@
           no-caps
           dense
         />
-        <q-toolbar-title class="text-center text-subtitle1" @click="userName">
+        <q-toolbar-title class="text-center text-subtitle1" @click="checkOtherUserProfile">
           <div class="flex justify-center">
             <q-icon size="sm" name="account_circle" class="q-pr-xs" v-if="$route.fullPath.includes('/chat')" />
             {{ title }}
@@ -25,7 +25,7 @@
           flat color="white" icon="account_circle" no-caps
         >
           <q-list separator>
-            <q-item clickable v-close-popup class="text-center">
+            <q-item clickable v-close-popup class="text-center" @click="checkOwnProfile">
             <q-item-section>
               <q-item-label>Update Profile</q-item-label>
             </q-item-section>
@@ -66,10 +66,10 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import mixinsOtherUserDetails from 'src/mixins/commonMixins.js'
+import commonMixins from 'src/mixins/commonMixins.js'
 
 export default {
-  mixins: [mixinsOtherUserDetails],
+  mixins: [commonMixins],
   data () {
     return {
       logout: 'logout'
@@ -87,12 +87,15 @@ export default {
   },
   methods: {
     ...mapActions('chatstore', ['LOGOUT_USER']),
-    userName () {
+    checkOtherUserProfile () {
       const currentPath = this.$route.fullPath
+      const otherUserId = this.$route.params.otherUserId
       if (currentPath.includes('/chat')) {
-        console.log('user name cliked')
-        this.$router.push('/userprofile')
+        this.$router.push(`/userprofile/${otherUserId}`)
       }
+    },
+    checkOwnProfile () {
+      this.$router.push(`/userprofile/${this.userDetails.userId}`)
     }
   },
   filters: {
