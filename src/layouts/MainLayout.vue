@@ -14,6 +14,9 @@
           dense
         />
         <q-toolbar-title class="text-center text-subtitle1" @click="checkOtherUserProfile">
+          <q-tooltip class="bg-amber text-black shadow-4" :offset="[10, 10]" v-if="$route.fullPath.includes('/chat')">
+            Click to view Profile
+          </q-tooltip>
           <div class="flex justify-center">
             <q-icon size="sm" name="account_circle" class="q-pr-xs" v-if="$route.fullPath.includes('/chat')" />
             {{ title }}
