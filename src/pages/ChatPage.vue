@@ -36,7 +36,9 @@
               rounded
               bg-color="white"
               label="Message"
-              dense>
+              dense
+              type="text"
+            >
               <template v-slot:after>
                 <q-btn
                   round
@@ -57,11 +59,11 @@
 /* eslint-disable prefer-const */
 
 import { mapState, mapActions } from 'vuex'
-import mixinsOtherUserDetails from 'src/mixins/mixins-other-user-details.js'
+import commonMixins from 'src/mixins/commonMixins.js'
 
 export default {
   name: 'ChatPage',
-  mixins: [mixinsOtherUserDetails],
+  mixins: [commonMixins],
   data () {
     return {
       newMessage: '',
@@ -74,7 +76,8 @@ export default {
   methods: {
     ...mapActions('chatstore', ['FIREBASE_GET_MESSAGES', 'FIREBASE_STOP_GETTING_MESSAGES', 'FIREBASE_SEND_MESSAGE']),
     sendMessage () {
-      this.firebaseSendMessage({
+      if (this.hasWhiteSpacesOnly(this.newMessage) === 'field is empty') return ''
+      this.FIREBASE_SEND_MESSAGE({
         message: {
           text: this.newMessage,
           from: 'me'
@@ -139,6 +142,7 @@ export default {
      z-index 1
   .q-banner
      top 50px
-     z-index 2
+     z-index 2        class="text-subtitle1"
+
      opacity 0.8
 </style>

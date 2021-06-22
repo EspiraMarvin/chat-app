@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 // import example from './module-example'
-import chatstore from './chatstore'
+import chatstore from './modules/chat/chatstore'
 
 Vue.use(Vuex)
 

@@ -6,6 +6,7 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/UsersPage.vue') },
       { path: '/chat/:otherUserId', component: () => import('pages/ChatPage.vue') },
+      { path: '/userprofile', component: () => import('pages/UserProfilePage.vue') },
       { path: '/auth', component: () => import('pages/AuthPage.vue') }
     ]
   },

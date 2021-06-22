@@ -25,7 +25,7 @@
           <q-badge
             :color="user.online ? 'light-green-5' : 'grey-4' "
           >
-            {{ user.online ? 'online' : 'Offline' }}
+            {{ user.online ? 'Online' : 'Offline' }}
           </q-badge>
         </q-item-section>
       </q-item>
