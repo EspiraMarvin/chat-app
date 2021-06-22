@@ -23,9 +23,7 @@
         <div class="text-caption">Joined: {{ otherUserDetails.joined | relativeDate }}</div>
         <q-card flat>
           <q-input
-            v-model="otherUserDetails.status" class="q-mt-sm" label="Status"
-            :disable="userDetails.userId !== this.$route.params.otherUserId"
-          >
+            v-model="otherUserDetails.status" class="q-mt-sm" label="Status" readonly>
               <template v-slot:append v-if="userDetails.userId === this.$route.params.otherUserId">
                 <q-icon name="edit" @click="openDialog" class="cursor-pointer" />
               </template>
@@ -71,7 +69,8 @@ export default {
   },
   data () {
     return {
-      editProfileDialog: false
+      editProfileDialog: false,
+      disable: true
     }
   },
   methods: {
