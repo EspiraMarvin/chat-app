@@ -20,9 +20,12 @@
       <q-card-section class="q-pt-none">
         <div class="text-subtitle2">User Name: {{ otherUserDetails.name }}</div>
         <div class="text-caption">Email: {{ otherUserDetails.email }}</div>
-        <div class="text-caption">Joined: {{ otherUserDetails.joined }}</div>
+        <div class="text-caption">Joined: {{ otherUserDetails.joined | relativeDate }}</div>
         <q-card flat>
-          <q-input v-model="otherUserDetails.status" class="q-mt-sm" label="Status">
+          <q-input
+            v-model="otherUserDetails.status" class="q-mt-sm" label="Status"
+            :disable="userDetails.userId !== this.$route.params.otherUserId"
+          >
               <template v-slot:append v-if="userDetails.userId === this.$route.params.otherUserId">
                 <q-icon name="edit" @click="openDialog" class="cursor-pointer" />
               </template>
