@@ -44,12 +44,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions('chatstore', ['registerUser', 'loginUser']),
+    ...mapActions('chatstore', ['REGISTER_USER', 'LOGIN_USER']),
     submitForm () {
       if (this.tab === 'login') {
-        this.loginUser(this.formData)
+        this.LOGIN_USER(this.formData)
       } else {
-        this.registerUser(this.formData)
+        this.REGISTER_USER(this.formData)
       }
     }
   }

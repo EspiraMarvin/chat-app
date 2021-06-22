@@ -9,10 +9,10 @@ import { mapActions } from 'vuex'
 export default {
   name: 'App',
   methods: {
-    ...mapActions('chatstore', ['handleAuthStateChanged'])
+    ...mapActions('chatstore', ['HANDLE_AUTH_STATE_CHANGED'])
   },
   mounted () {
-    this.handleAuthStateChanged()
+    this.HANDLE_AUTH_STATE_CHANGED()
   }
 }
 </script>

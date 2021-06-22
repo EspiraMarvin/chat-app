@@ -72,7 +72,7 @@ export default {
     ...mapState('chatstore', ['messages', 'userDetails'])
   },
   methods: {
-    ...mapActions('chatstore', ['firebaseGetMessages', 'firebaseStopGettingMessages', 'firebaseSendMessage']),
+    ...mapActions('chatstore', ['FIREBASE_GET_MESSAGES', 'FIREBASE_STOP_GETTING_MESSAGES', 'FIREBASE_SEND_MESSAGE']),
     sendMessage () {
       this.firebaseSendMessage({
         message: {
@@ -112,10 +112,10 @@ export default {
   mounted () {
     // get messages from the other user id
     // console.log(this.$route.params.otherUserId)
-    this.firebaseGetMessages(this.$route.params.otherUserId)
+    this.FIREBASE_GET_MESSAGES(this.$route.params.otherUserId)
   },
   destroyed () {
-    this.firebaseStopGettingMessages()
+    this.FIREBASE_STOP_GETTING_MESSAGES()
   }
 }
 </script>

@@ -29,7 +29,7 @@
 
         <q-btn
           v-else
-          @click="logoutUser"
+          @click="LOGOUT_USER"
           class="absolute-right q-pr-sm"
           no-caps
           icon="account_circle"
@@ -59,7 +59,6 @@ export default {
     ...mapState('chatstore', ['userDetails']),
     // eslint-disable-next-line vue/return-in-computed-property
     title () {
-      // console.log(this.$route)
       const currentPath = this.$route.fullPath
       if (currentPath === '/') return 'Quasar Chat'
       else if (currentPath.includes('/chat')) return this.otherUserDetails.name
@@ -67,7 +66,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('chatstore', ['logoutUser'])
+    ...mapActions('chatstore', ['LOGOUT_USER'])
   }
 }
 </script>
