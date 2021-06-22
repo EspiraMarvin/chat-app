@@ -14,10 +14,19 @@
         label="Email" />
       <q-input
         v-model="formData.password"
+        :type="isPwd ? 'password' : 'text'"
         outlined
         class="q-mb-md"
-        type="password"
-        label="Password" />
+        label="Password"
+      >
+        <template v-slot:append>
+          <q-icon
+            :name="isPwd ? 'visibility_off' : 'visibility'"
+            class="cursor-pointer"
+            @click="isPwd = !isPwd"
+          />
+        </template>
+      </q-input>
       <div class="row">
         <q-space />
         <q-btn
@@ -40,7 +49,8 @@ export default {
         name: '',
         email: 'espiramarvin@gmail.com',
         password: '12345678'
-      }
+      },
+      isPwd: true
     }
   },
   methods: {

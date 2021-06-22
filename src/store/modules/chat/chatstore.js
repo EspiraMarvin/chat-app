@@ -41,7 +41,10 @@ const actions = {
         firebaseDb.ref('users/' + userId).set({
           name: payload.name,
           email: payload.email,
-          online: true
+          online: true,
+          status: 'Hey there you are using quasar chat app!',
+          location: 'Kenya',
+          joined: Date.now()
         })
       })
       .catch(error => console.log(error.message))
@@ -102,6 +105,12 @@ const actions = {
     if (payload.userId) {
       firebaseDb.ref(`users/${payload.userId}`).update(payload.updates)
     }
+  },
+
+  // update user profile
+  // eslint-disable-next-line no-empty-pattern
+  FIREBASE_UPDATE_USER_PROFILE ({}, payload) {
+
   },
 
   // get all users from the db when user logs in

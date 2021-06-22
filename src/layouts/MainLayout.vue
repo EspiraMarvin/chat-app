@@ -8,7 +8,7 @@
           v-if="$route.fullPath.includes('/chat') || $route.fullPath.includes('/userprofile')"
           v-go-back.single
           icon="arrow_back"
-          size="12px"
+          size="14px"
           flat
           no-caps
           dense
@@ -46,15 +46,6 @@
           no-caps
         >
         </q-btn>
-<!--        <q-toggle-->
-<!--          v-else-->
-<!--          :false-value="this.$q.dark.set(theme)"-->
-<!--          :true-value="this.$q.dark.set(theme)"-->
-<!--          v-model="theme"-->
-<!--          :icon="$q.dark.isActive ? 'nights_stay' : 'wb_sunny'"-->
-<!--          color="black"-->
-<!--          size="lg"-->
-<!--        />-->
       </q-toolbar>
     </q-header>
 
@@ -83,6 +74,7 @@ export default {
       if (currentPath === '/') return 'Chat'
       else if (currentPath.includes('/chat')) return this.otherUserDetails.name
       else if (currentPath === '/auth') return 'Login'
+      else if (currentPath.includes('/userprofile')) return 'Profile'
     }
   },
   methods: {
