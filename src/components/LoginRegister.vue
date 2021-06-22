@@ -38,8 +38,8 @@ export default {
     return {
       formData: {
         name: '',
-        email: '',
-        password: ''
+        email: 'espiramarvin@gmail.com',
+        password: '12345678'
       }
     }
   },
