@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md  items-start">
+  <div class="q-pa-md  items-start" v-if="this.ownUserDetails.userId === this.$route.params.otherUserId">
     <q-card flat class="my-card full-width q-px-md">
       <q-img
           src="../statics/no-profile-pic.jpg"
@@ -22,16 +22,17 @@
         <div class="text-caption">Email: {{ otherUserDetails.email }}</div>
         <div class="text-caption">Joined: {{ otherUserDetails.joined | relativeDate }}</div>
         <q-card flat>
+          {{ userD }}
           <q-input
             v-model="otherUserDetails.status" class="q-mt-sm" label="Status" readonly>
-              <template v-slot:append v-if="userDetails.userId === this.$route.params.otherUserId">
+              <template v-slot:append v-if="ownUserDetails.userId === this.$route.params.otherUserId">
                 <q-icon name="edit" @click="openDialog" class="cursor-pointer" />
               </template>
             </q-input>
           <q-dialog v-model="editProfileDialog" position="bottom">
             <q-card style="width: 450px">
-              <q-form class="q-pa-md">
-                <q-input v-model="otherUserDetails.status" class="q-mt-sm" label="Status" />
+              <q-form class="q-pa-md" @submit="save">
+                <q-input v-model="formData.status" class="q-mt-sm" label="Status" />
                 <div class="row">
                   <q-space />
                   <q-btn color="primary" outline flat class="q-mt-md q-mr-sm" label="Cancel" @click="closeDialog" />
@@ -48,19 +49,21 @@
 
 <script>
 import commonMixins from 'src/mixins/commonMixins'
+import { cloneDeep } from 'lodash'
 import { formatDistance } from 'date-fns'
-import { mapState } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'UserProfilePage',
   mixins: [commonMixins],
   mounted () {
-    console.log('getUserId', this.userDetails.id)
-    const params = this.$route.params.userId
-    // console.log('getPath', getPath)
-    console.log('params', params)
   },
   computed: {
-    ...mapState('chatstore', ['users', 'userDetails'])
+    ...mapGetters('chatstore', ['users', 'ownUserDetails', 'ownUserDt', 'otherUserDt']),
+    // ...mapState('chatstore', ['users', 'userDetails'])
+    userD () {
+      // ownUserDt.keys("status")[0]
+      return this.ownUserDt
+    }
   },
   filters: {
     relativeDate (value) {
@@ -70,15 +73,29 @@ export default {
   data () {
     return {
       editProfileDialog: false,
-      disable: true
+      disable: true,
+      formData: {
+        status: ''
+      }
     }
   },
   methods: {
+    ...mapActions('chatstore', ['FIREBASE_UPDATE_USER_PROFILE']),
     openDialog () {
       this.editProfileDialog = true
+      this.formData.status = cloneDeep(this.otherUserDetails.status)
+      console.log('this.otherUserDetails.status', this.otherUserDetails)
+      console.log('this.ownUserDetails.status', this.ownUserDetails.userId)
     },
     closeDialog () {
       this.editProfileDialog = false
+    },
+    save () {
+      const updates = []
+      updates.push(this.ownUserDetails.userId)
+      updates.push(this.formData.status)
+      this.FIREBASE_UPDATE_USER_PROFILE(updates)
+      this.closeDialog()
     }
   }
 }
