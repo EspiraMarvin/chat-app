@@ -185,37 +185,6 @@ const getters = {
     return usersFiltered
   },
   ownUserDetails: state => state.userDetails,
-  // ownUserDetails: state => {
-  //   const ownUserDetails = []
-  //   Object.keys(state.users).forEach(key => {
-  //     if (key === state.userDetails.userId) {
-  //       ownUserDetails[key] = state.users[key]
-  //     }
-  //   })
-  //   return ownUserDetails
-  // },
-
-  // ownUserDt: state => {
-  //   const ownUserDt = {}
-  //   Object.keys(state.users).forEach(key => {
-  //     if (key === state.userDetails.userId) {
-  //       ownUserDt[key] = state.users[key]
-  //     }
-  //   })
-  //   return ownUserDt
-  // },
-
-  ownUserDt: state => {
-    const ownUserDt = {}
-    Object.keys(state.users).forEach(key => {
-      if (key === state.userDetails.userId) {
-        // ownUserDt.push(state.users)
-        ownUserDt[key] = state.users[key]
-      }
-    })
-    return ownUserDt
-  },
-
   otherUserDt: state => {
     const otherUserDt = {}
     Object.keys(state.users).forEach(key => {

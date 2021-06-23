@@ -23,7 +23,7 @@
 
         <q-item-section side>
           <q-badge
-            :color="user.online ? 'light-green-5' : 'grey-4' "
+            :color="user.online ? 'light-green-5' : 'grey-8' "
           >
             {{ user.online ? 'Online' : 'Offline' }}
           </q-badge>

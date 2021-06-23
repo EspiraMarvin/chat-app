@@ -1,10 +1,10 @@
 <template>
-  <div class="q-pa-md  items-start" v-if="this.ownUserDetails.userId === this.$route.params.otherUserId">
+  <div class="q-pa-xs">
     <q-card flat class="my-card full-width q-px-md">
       <q-img
-          src="../statics/no-profile-pic.jpg"
-          :ratio="4/5"
-          style="height: auto; max-height: 600px"
+        src="../statics/no-profile-pic.jpg"
+        :ratio="4/5"
+        style="height: auto; max-height: 580px"
         >
           <div class="absolute-bottom text-subtitle1 text-center" style="height: 60px">
             <q-chip
@@ -19,16 +19,17 @@
 
       <q-card-section class="q-pt-none">
         <div class="text-subtitle2">User Name: {{ otherUserDetails.name }}</div>
-        <div class="text-caption">Email: {{ otherUserDetails.email }}</div>
-        <div class="text-caption">Joined: {{ otherUserDetails.joined | relativeDate }}</div>
-        <q-card flat>
-          {{ userD }}
+        <div class="text-caption">
+          Email: {{ otherUserDetails.email }} <br>
+          Joined: {{ otherUserDetails.joined | relativeDate }}
+        </div>
+        <q-card flat v-if="ownUserDetails.userId === this.$route.params.otherUserId">
           <q-input
             v-model="otherUserDetails.status" class="q-mt-sm" label="Status" readonly>
-              <template v-slot:append v-if="ownUserDetails.userId === this.$route.params.otherUserId">
+              <template v-slot:append>
                 <q-icon name="edit" @click="openDialog" class="cursor-pointer" />
               </template>
-            </q-input>
+          </q-input>
           <q-dialog v-model="editProfileDialog" position="bottom">
             <q-card style="width: 450px">
               <q-form class="q-pa-md" @submit="save">
@@ -43,6 +44,32 @@
           </q-dialog>
         </q-card>
       </q-card-section>
+      <q-expansion-item
+        v-if="ownUserDetails.userId === this.$route.params.otherUserId"
+        class="q-pt-sm hidden"
+        icon="settings"
+        label="Account settings"
+        caption="Appearance"
+        dense-toggle
+      >
+        <q-card>
+            <q-list class="q-ml-xl" separator>
+              <div class="q-ml-md">
+                <q-item clickable v-ripple @click="setTheme('true')">
+                  <q-item-section>
+                    <q-item-label>Dark Mode</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-ripple @click="setTheme('false')">
+                  <q-item-section>
+                    <q-item-label>Light Mode</q-item-label>
+                  </q-item-section>
+                </q-item>
+              </div>
+            </q-list>
+        </q-card>
+      </q-expansion-item>
+
     </q-card>
   </div>
 </template>
@@ -55,15 +82,9 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'UserProfilePage',
   mixins: [commonMixins],
-  mounted () {
-  },
   computed: {
-    ...mapGetters('chatstore', ['users', 'ownUserDetails', 'ownUserDt', 'otherUserDt']),
-    // ...mapState('chatstore', ['users', 'userDetails'])
-    userD () {
-      // ownUserDt.keys("status")[0]
-      return this.ownUserDt
-    }
+    ...mapGetters('chatstore', ['ownUserDetails']),
+    ...mapGetters('themestore', ['appTheme'])
   },
   filters: {
     relativeDate (value) {
@@ -73,19 +94,17 @@ export default {
   data () {
     return {
       editProfileDialog: false,
-      disable: true,
       formData: {
         status: ''
       }
     }
   },
   methods: {
+    ...mapActions('themestore', ['CHANGE_THEME', 'GET_THEME']),
     ...mapActions('chatstore', ['FIREBASE_UPDATE_USER_PROFILE']),
     openDialog () {
       this.editProfileDialog = true
       this.formData.status = cloneDeep(this.otherUserDetails.status)
-      console.log('this.otherUserDetails.status', this.otherUserDetails)
-      console.log('this.ownUserDetails.status', this.ownUserDetails.userId)
     },
     closeDialog () {
       this.editProfileDialog = false
@@ -101,6 +120,13 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+@media (prefers-color-scheme: dark) {
+  body{
+    background: #222222;
+  }
+  h1 {
+    color: #eeeeee;
+  }
+}
 </style>
