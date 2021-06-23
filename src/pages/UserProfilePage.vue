@@ -83,8 +83,7 @@ export default {
   name: 'UserProfilePage',
   mixins: [commonMixins],
   computed: {
-    ...mapGetters('chatstore', ['ownUserDetails']),
-    ...mapGetters('themestore', ['appTheme'])
+    ...mapGetters('chatstore', ['ownUserDetails'])
   },
   filters: {
     relativeDate (value) {
@@ -96,15 +95,16 @@ export default {
       editProfileDialog: false,
       formData: {
         status: ''
-      }
+      },
+      originFormData: {}
     }
   },
   methods: {
-    ...mapActions('themestore', ['CHANGE_THEME', 'GET_THEME']),
     ...mapActions('chatstore', ['FIREBASE_UPDATE_USER_PROFILE']),
     openDialog () {
       this.editProfileDialog = true
       this.formData.status = cloneDeep(this.otherUserDetails.status)
+      this.originFormData = this.formData.status
     },
     closeDialog () {
       this.editProfileDialog = false
@@ -115,6 +115,9 @@ export default {
       updates.push(this.formData.status)
       this.FIREBASE_UPDATE_USER_PROFILE(updates)
       this.closeDialog()
+      if (this.originFormData !== this.formData.status) {
+        this.$q.notify({ message: 'Status Updated', color: 'primary', spinner: 1200 })
+      }
     }
   }
 }

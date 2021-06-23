@@ -4,18 +4,12 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
   methods: {
-    ...mapActions('chatstore', ['HANDLE_AUTH_STATE_CHANGED']),
-    ...mapActions('themestore', ['GET_THEME'])
-  },
-  created () {
-  },
-  computed: {
-    ...mapGetters('themestore', ['appTheme'])
+    ...mapActions('chatstore', ['HANDLE_AUTH_STATE_CHANGED'])
   },
   mounted () {
     this.HANDLE_AUTH_STATE_CHANGED()

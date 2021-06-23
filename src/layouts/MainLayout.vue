@@ -40,15 +40,6 @@
           </q-item>
           </q-list>
         </q-btn-dropdown>
-        <q-toggle
-          v-if="$route.fullPath === '/auth'"
-          :false-value="this.$q.dark.set(theme)"
-          :true-value="this.$q.dark.set(theme)"
-          v-model="theme"
-          :icon="$q.dark.isActive ? 'nights_stay' : 'wb_sunny'"
-          color="black"
-          size="lg"
-        />
       </q-toolbar>
     </q-header>
 
@@ -64,19 +55,6 @@ import commonMixins from 'src/mixins/commonMixins.js'
 
 export default {
   mixins: [commonMixins],
-  created () {
-    this.theme = JSON.parse(localStorage.getItem('theme'))
-  },
-  watch: {
-    theme: function () {
-      localStorage.setItem('theme', JSON.stringify(this.theme))
-    }
-  },
-  data () {
-    return {
-      theme: ''
-    }
-  },
   computed: {
     ...mapState('chatstore', ['userDetails']),
     // eslint-disable-next-line vue/return-in-computed-property

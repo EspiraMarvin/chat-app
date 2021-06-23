@@ -109,7 +109,6 @@ const actions = {
   // update user profile
   // eslint-disable-next-line no-empty-pattern
   FIREBASE_UPDATE_USER_PROFILE ({ dispatch }, payload) {
-    console.log('payload', payload)
     dispatch('FIREBASE_UPDATE_USER', {
       userId: payload[0],
       updates: {
