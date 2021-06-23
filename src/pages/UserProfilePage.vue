@@ -21,7 +21,7 @@
         <div class="text-subtitle2">User Name: {{ otherUserDetails.name }}</div>
         <div class="text-caption">
           Email: {{ otherUserDetails.email }} <br>
-          Joined: {{ otherUserDetails.joined | relativeDate }}
+          Joined: {{ otherUserDetails.joined | relativeDate }} ago
         </div>
         <q-card flat v-if="ownUserDetails.userId === this.$route.params.otherUserId">
           <q-input
