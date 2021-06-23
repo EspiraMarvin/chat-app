@@ -93,7 +93,7 @@ const actions = {
           }
         })
         commit('SET_USER_DETAILS', {})
-        this.$router.replace('/auth').catch(error => console.log(error))
+        this.$router.push('/auth').catch(error => console.log(error))
       }
     })
   },

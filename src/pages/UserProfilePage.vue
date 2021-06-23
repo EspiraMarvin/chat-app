@@ -18,8 +18,8 @@
       </q-card-section>
 
       <q-card-section class="q-pt-none">
-        <div class="text-subtitle2">User Name: {{ otherUserDetails.name }}</div>
-        <div class="text-caption">
+        <div class="text-subtitle1">User Name: {{ otherUserDetails.name }}</div>
+        <div class="text-subtitle2">
           Email: {{ otherUserDetails.email }} <br>
           Joined: {{ otherUserDetails.joined | relativeDate }} ago
         </div>
@@ -116,7 +116,7 @@ export default {
       this.FIREBASE_UPDATE_USER_PROFILE(updates)
       this.closeDialog()
       if (this.originFormData !== this.formData.status) {
-        this.$q.notify({ message: 'Status Updated', color: 'primary', spinner: 1200 })
+        this.$q.notify({ message: 'Status Updated', color: 'primary' })
       }
     }
   }
