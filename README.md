@@ -22,5 +22,11 @@ yarn run lint
 quasar build
 ```
 
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+
+### runs on localhost:8081
+
+### link to the app is down below
+
+###[chat app](https://quasar-chatpp.vercel.app/auth)
+
+#### url -> https://quasar-chatpp.vercel.app/auth
