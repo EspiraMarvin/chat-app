@@ -23,10 +23,10 @@
           Email: {{ otherUserDetails.email }} <br>
           Joined: {{ otherUserDetails.joined | relativeDate }} ago
         </div>
-        <q-card flat v-if="ownUserDetails.userId === this.$route.params.otherUserId">
+        <q-card flat>
           <q-input
             v-model="otherUserDetails.status" class="q-mt-sm" label="Status" readonly>
-              <template v-slot:append>
+              <template v-slot:append v-if="ownUserDetails.userId === this.$route.params.otherUserId">
                 <q-icon name="edit" @click="openDialog" class="cursor-pointer" />
               </template>
           </q-input>
