@@ -15,12 +15,12 @@ const getters = {
 
 const actions = {
   GET_THEME ({ commit }) {
-    const getTheme = JSON.parse(localStorage.getItem('theme'))
-    commit('SET_THEME', getTheme)
+    // const getTheme = JSON.parse(localStorage.getItem('theme'))
+    // commit('SET_THEME', getTheme)
   },
   CHANGE_THEME ({ commit }, payload) {
     // Dark.set(payload)
-    localStorage.setItem('theme', JSON.stringify(payload))
+    // localStorage.setItem('theme', JSON.stringify(payload))
     commit('SET_THEME', {
       theme: payload
     })
