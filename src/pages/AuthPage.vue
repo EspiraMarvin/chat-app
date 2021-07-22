@@ -1,14 +1,13 @@
 <template>
-  <q-page class="flex q-pa-md">
-    <q-card class="full-width">
+  <q-page class="flex flex-center q-pa-md">
+    <q-card flat>
       <q-tabs
         v-model="tab"
         dense
         class="text-grey"
         active-color="primary"
-        indicator-color="primary"
+        indicator-color="red"
         align="justify"
-        narrow-indicator
       >
         <q-tab name="login" label="Login" />
         <q-tab name="register" label="Register" />

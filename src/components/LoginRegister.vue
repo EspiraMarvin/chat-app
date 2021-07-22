@@ -1,5 +1,5 @@
 <template>
-    <q-form @submit="submitForm">
+  <q-form @submit="submitForm" class="q-mt-xl" style="width: 80vw; height: 70vh">
       <q-input
         v-if="tab === 'register'"
         v-model="formData.name"
